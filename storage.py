@@ -1,7 +1,6 @@
 import json
 import os
 
-# Путь к файлу с пользователями (папка data должна существовать)
 USER_DATA_FILE = 'data/users.json'
 
 
@@ -19,10 +18,8 @@ def load_users():
 def save_user(user_obj):
     """Сохраняет одного пользователя в файл"""
     users = load_users()
-    # Сохраняем по ключу username
     users[user_obj.username] = user_obj.to_dict()
 
-    # Создаем папку data, если её нет
     if not os.path.exists('data'):
         os.makedirs('data')
 
@@ -31,6 +28,6 @@ def save_user(user_obj):
 
 
 def get_user_by_username(username):
-    """Ищет пользователя по его имени (для логина)"""
+    """Ищет пользователя по его имени """
     users = load_users()
     return users.get(username)
