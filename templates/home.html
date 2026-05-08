@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>MiniBank - Welcome</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>MiniBank</h1>
-        <p>Ваш партнер в финансах.</p>
-        <div class="actions">
-            <a href="/login" class="btn">Войти</a>
-            <a href="/register" class="btn">Регистрация</a>
-        </div>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width: 600px;">
+    <h1>Добро пожаловать в MiniBank</h1>
+    <p>Безопасное управление вашими финансами онлайн.</p>
+    <a href="/register" class="btn btn-primary">Создать аккаунт сейчас</a>
+</div>
+{% endblock %}

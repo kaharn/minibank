@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Dashboard</title>
-</head>
-<body>
-    <div class="container" style="width: 500px;">
-        <nav style="margin-bottom: 20px; display: flex; justify-content: space-between;">
-            <span>Добро пожаловать, <b>{{ username }}</b>!</span>
-            <a href="/logout" style="color: red;">Выйти</a>
-        </nav>
-        <hr>
-        <div class="main-content">
-            <h1>Ваш кабинет</h1>
-            <div class="balance-card" style="background: #e9ecef; padding: 20px; border-radius: 8px;">
-                <h3>Текущий баланс</h3>
-                <p style="font-size: 2rem; color: #28a745;">$0.00</p>
-            </div>
-        </div>
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width: 600px;">
+    <h2>Привет, {{ username }}!</h2>
+    <div style="background: #e7f3ff; padding: 30px; border-radius: 12px; margin-top: 20px;">
+        <span style="color: #555;">Твой баланс:</span>
+        <h1 style="color: var(--primary); margin: 10px 0;">$0.00</h1>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

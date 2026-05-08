@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Регистрация - MiniBank</title>
-</head>
-<body>
-    <div class="container">
-        <h2>Создать аккаунт</h2>
-        <form action="/register" method="POST">
-            <input type="text" name="full_name" placeholder="Полное имя" required>
-            <input type="text" name="username" placeholder="Логин" required>
-            <input type="password" name="password" placeholder="Пароль" required>
-            <button type="submit">Регистрация</button>
-        </form>
-        <p style="margin-top: 15px;">Уже есть аккаунт? <a href="/login">Войти</a></p>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>Регистрация</h2>
+    <form method="POST">
+        <input type="text" name="full_name" placeholder="Полное имя" required>
+        <input type="text" name="username" placeholder="Логин" required>
+        <input type="password" name="password" placeholder="Пароль" required>
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+    </form>
+</div>
+{% endblock %}
