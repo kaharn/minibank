@@ -9,5 +9,4 @@ class User:
             "username": self.username,
             "password": self.password,
             "full_name": self.full_name
-
         }

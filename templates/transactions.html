@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card" style="max-width: 1000px; width: 95%;">
+
+    <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    ">
+
+        <h2>
+            <i class="fas fa-clock"></i>
+            Все операции
+        </h2>
+
+        <a href="/dashboard"
+           class="btn btn-primary"
+           style="text-decoration: none;">
+
+            Назад
+
+        </a>
+
+    </div>
+
+
+    <table style="
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+    ">
+
+        <thead>
+
+            <tr style="
+                border-bottom: 2px solid #444;
+                color: #999;
+            ">
+
+                <th style="padding: 14px 8px; text-align: left;">
+                    Тип
+                </th>
+
+                <th style="padding: 14px 8px; text-align: left;">
+                    Детали
+                </th>
+
+                <th style="padding: 14px 8px; text-align: right;">
+                    Сумма
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for tx in transactions %}
+
+            <tr style="border-bottom: 1px solid #333;">
+
+                {% if tx.sender == 'BANK' %}
+
+                <td style="
+                    padding: 14px 8px;
+                    color: #00c853;
+                    font-weight: bold;
+                ">
+                    Пополнение
+                </td>
+
+                <td style="padding: 14px 8px;">
+                    Bank Deposit
+                </td>
+
+                <td style="
+                    padding: 14px 8px;
+                    text-align: right;
+                    font-weight: bold;
+                    color: #00c853;
+                ">
+                    + ${{ tx.amount }}
+                </td>
+
+                {% elif tx.sender == username %}
+
+                <td style="
+                    padding: 14px 8px;
+                    color: #ff4d4f;
+                    font-weight: bold;
+                ">
+                    Перевод
+                </td>
+
+                <td style="padding: 14px 8px;">
+                    → {{ tx.receiver }}
+                </td>
+
+                <td style="
+                    padding: 14px 8px;
+                    text-align: right;
+                    font-weight: bold;
+                    color: #ff4d4f;
+                ">
+                    - ${{ tx.amount }}
+                </td>
+
+                {% else %}
+
+                <td style="
+                    padding: 14px 8px;
+                    color: #00c853;
+                    font-weight: bold;
+                ">
+                    Получение
+                </td>
+
+                <td style="padding: 14px 8px;">
+                    ← {{ tx.sender }}
+                </td>
+
+                <td style="
+                    padding: 14px 8px;
+                    text-align: right;
+                    font-weight: bold;
+                    color: #00c853;
+                ">
+                    + ${{ tx.amount }}
+                </td>
+
+                {% endif %}
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

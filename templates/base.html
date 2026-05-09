@@ -4,12 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiniBank System</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <script>
+
+setTimeout(() => {
+
+    const flash = document.getElementById('flash-container');
+
+    if (flash) {
+
+        flash.style.transition = '0.5s';
+        flash.style.opacity = '0';
+
+        setTimeout(() => {
+            flash.remove();
+        }, 500);
+
+    }
+
+}, 2500);
+
+</script>
 
     <nav class="navbar">
         <div class="logo">
@@ -17,6 +36,7 @@
                 <i class="fas fa-university"></i> MiniBank
             </a>
         </div>
+
         <div class="nav-links">
             {% if session.get('user') %}
                 <a href="/dashboard">Личный кабинет</a>
@@ -25,8 +45,46 @@
                 <a href="/login">Вход</a>
                 <a href="/register">Регистрация</a>
             {% endif %}
+
+            <button id="theme-toggle" class="theme-btn">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </nav>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+        <div id="flash-container"
+             style="
+                padding: 15px;
+                max-width: 900px;
+                margin: 20px auto;
+             ">
+
+            {% for message in messages %}
+
+                <div class="flash-message"
+                     style="
+                        background: #1a73e8;
+                        color: white;
+                        padding: 12px 18px;
+                        border-radius: 10px;
+                        margin-bottom: 10px;
+                        text-align: center;
+                        font-weight: 600;
+                     ">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+{% endwith %}
 
     <div class="main-wrapper">
         {% block content %}
@@ -37,5 +95,24 @@
         &copy; 2026 MiniBank System. Разработано для учебного проекта.
     </footer>
 
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+
 </body>
+
 </html>

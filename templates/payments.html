@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card" style="
+    max-width: 1200px;
+    width: 95%;
+    padding: 35px;
+">
+
+    <!-- HEADER -->
+
+    <div style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
+    ">
+
+        <div style="
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        ">
+
+            <div style="
+                width: 85px;
+                height: 85px;
+                border-radius: 25px;
+                background: linear-gradient(135deg,#16213e,#0f3460);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                font-size: 2rem;
+            ">
+
+                <i class="fas fa-credit-card"></i>
+
+            </div>
+
+
+            <h1 style="
+                margin: 0;
+                font-size: 3rem;
+                color: var(--text);
+            ">
+                Платежи
+            </h1>
+
+        </div>
+
+
+        <a href="/dashboard"
+           class="btn btn-primary"
+           style="
+                text-decoration: none;
+                padding: 18px 30px;
+                border-radius: 18px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                width: 220px;
+                text-align: center;
+           ">
+
+            <i class="fas fa-arrow-left"></i>
+            &nbsp;Назад
+
+        </a>
+
+    </div>
+
+
+    <!-- DIVIDER -->
+
+    <div style="
+        height: 1px;
+        background: rgba(255,255,255,0.08);
+        margin-bottom: 30px;
+    "></div>
+
+
+    <!-- PAYMENTS -->
+
+    <div style="
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    ">
+
+        <!-- HAREKET -->
+
+        <form action="/payment/hareket" method="POST">
+
+            <div style="
+                background: rgba(0,0,0,0.03);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 24px;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                gap: 18px;
+            ">
+
+                <div style="
+                    width: 85px;
+                    height: 85px;
+                    min-width: 85px;
+                    border-radius: 24px;
+                    background: linear-gradient(135deg,#ff9800,#ffb300);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    font-size: 2rem;
+                ">
+
+                    <i class="fas fa-hand-holding-heart"></i>
+
+                </div>
+
+
+                <input type="number"
+                       step="0.01"
+                       name="amount"
+                       placeholder="Сумма для Харекет Қоры"
+                       required
+                       style="
+    flex: 1;
+    width: 100%;
+    min-width: 250px;
+    padding: 18px 22px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.03);
+    color: var(--text);
+    font-size: 1.1rem;
+    outline: none;
+">
+
+
+                <button type="submit"
+                        class="btn"
+                        style="
+                            background: linear-gradient(135deg,#ff9800,#ffb300);
+                            color: white;
+                            padding: 18px 28px;
+                            border-radius: 18px;
+                            font-size: 1.1rem;
+                            font-weight: bold;
+                            min-width: 220px;
+                            border: none;
+                        ">
+
+                    Харекет Қоры
+                    <i class="fas fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <!-- MOBILE -->
+
+        <a href="/payments/mobile"
+           style="text-decoration:none;">
+
+            <div style="
+                background: rgba(0,0,0,0.03);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 24px;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                gap: 18px;
+flex-wrap: wrap;
+            ">
+
+                <div style="
+                    width: 85px;
+                    height: 85px;
+                    min-width: 85px;
+                    border-radius: 24px;
+                    background: linear-gradient(135deg,#2563eb,#1a73e8);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    font-size: 2rem;
+                ">
+
+                    <i class="fas fa-mobile-alt"></i>
+
+                </div>
+
+
+                <div style="flex:1;">
+
+                    <h2 style="
+                        margin: 0;
+                        color: var(--text);
+                    ">
+                        Мобильная связь
+                    </h2>
+
+                    <p style="
+                        margin-top: 8px;
+                        color: #888;
+                    ">
+                        Beeline, Activ, Tele2, Altel
+                    </p>
+
+                </div>
+
+
+                <div style="
+                    background: linear-gradient(135deg,#2563eb,#1a73e8);
+                    color: white;
+                    padding: 18px 24px;
+                    border-radius: 18px;
+                    font-weight: bold;
+                ">
+
+                    Открыть
+                    <i class="fas fa-arrow-right"></i>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- INTERNET -->
+
+        <a href="/payments/internet"
+           style="text-decoration:none;">
+
+            <div style="
+                background: rgba(0,0,0,0.03);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 24px;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                gap: 18px;
+            ">
+
+                <div style="
+                    width: 85px;
+                    height: 85px;
+                    min-width: 85px;
+                    border-radius: 24px;
+                    background: linear-gradient(135deg,#16a34a,#22c55e);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    font-size: 2rem;
+                ">
+
+                    <i class="fas fa-wifi"></i>
+
+                </div>
+
+
+                <div style="flex:1;">
+
+                    <h2 style="
+                        margin: 0;
+                        color: var(--text);
+                    ">
+                        Интернет
+                    </h2>
+
+                    <p style="
+                        margin-top: 8px;
+                        color: #888;
+                    ">
+                        Казахтелеком, Beeline Home, AlmaTV
+                    </p>
+
+                </div>
+
+
+                <div style="
+                    background: linear-gradient(135deg,#16a34a,#22c55e);
+                    color: white;
+                    padding: 18px 24px;
+                    border-radius: 18px;
+                    font-weight: bold;
+                ">
+
+                    Открыть
+                    <i class="fas fa-arrow-right"></i>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+  {% endblock %}</div>
