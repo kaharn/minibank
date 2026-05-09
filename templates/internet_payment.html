@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card" style="
+    max-width: 700px;
+    width: 95%;
+">
+
+    <h1 style="
+        margin-bottom: 30px;
+        color: var(--text);
+    ">
+        🌐 Интернет
+    </h1>
+
+
+    <form action="/payment/internet" method="POST">
+
+        <select name="provider" required>
+
+            <option value="">Выберите провайдера</option>
+            <option value="Казахтелеком">Казахтелеком</option>
+            <option value="Beeline Home">Beeline Home</option>
+            <option value="AlmaTV">AlmaTV</option>
+
+        </select>
+
+
+        <input type="text"
+               name="account"
+               placeholder="Номер договора / логин"
+               required>
+
+
+        <input type="number"
+               step="0.01"
+               name="amount"
+               placeholder="Сумма оплаты"
+               required>
+
+
+        <button type="submit"
+                class="btn btn-success">
+
+            Оплатить интернет
+
+        </button>
+
+    </form>
+
+
+    <a href="/payments"
+       style="
+            display:block;
+            margin-top:20px;
+            color:#1a73e8;
+            text-decoration:none;
+       ">
+
+        ← Назад к платежам
+
+    </a>
+
+</div>
+
+{% endblock %}
