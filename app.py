@@ -7,8 +7,10 @@ from decorators import login_required
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
 
-DATA_FILE = 'data/users.json'
-TRANSACTIONS_FILE = 'data/transactions.json'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+DATA_FILE = os.path.join(BASE_DIR, 'data', 'users.json')
+TRANSACTIONS_FILE = os.path.join(BASE_DIR, 'data', 'transactions.json')
 
 
 # =========================
@@ -16,21 +18,28 @@ TRANSACTIONS_FILE = 'data/transactions.json'
 # =========================
 
 def load_users():
+
     if not os.path.exists(DATA_FILE):
         return {}
 
     with open(DATA_FILE, 'r', encoding='utf-8') as f:
+
         try:
             return json.load(f)
+
         except:
             return {}
 
 
 def save_users(users):
-    if not os.path.exists('data'):
-        os.makedirs('data')
+
+    data_folder = os.path.join(BASE_DIR, 'data')
+
+    if not os.path.exists(data_folder):
+        os.makedirs(data_folder)
 
     with open(DATA_FILE, 'w', encoding='utf-8') as f:
+
         json.dump(users, f, indent=4, ensure_ascii=False)
 
 
@@ -39,18 +48,28 @@ def save_users(users):
 # =========================
 
 def load_transactions():
+
     if not os.path.exists(TRANSACTIONS_FILE):
         return []
 
     with open(TRANSACTIONS_FILE, 'r', encoding='utf-8') as f:
+
         try:
             return json.load(f)
+
         except:
             return []
 
 
 def save_transactions(transactions):
+
+    data_folder = os.path.join(BASE_DIR, 'data')
+
+    if not os.path.exists(data_folder):
+        os.makedirs(data_folder)
+
     with open(TRANSACTIONS_FILE, 'w', encoding='utf-8') as f:
+
         json.dump(transactions, f, indent=4, ensure_ascii=False)
 
 
@@ -60,6 +79,7 @@ def save_transactions(transactions):
 
 @app.route('/')
 def home():
+
     return render_template('home.html')
 
 
@@ -79,7 +99,9 @@ def register():
         users = load_users()
 
         if username in users:
+
             flash("Пользователь уже существует!")
+
             return redirect(url_for('register'))
 
         hashed_password = generate_password_hash(password)
@@ -93,6 +115,7 @@ def register():
         save_users(users)
 
         flash("Регистрация успешна!")
+
         return redirect(url_for('login'))
 
     return render_template('register.html')
@@ -146,6 +169,7 @@ def dashboard():
     for tx in reversed(transactions):
 
         if tx['sender'] == session['user'] or tx['receiver'] == session['user']:
+
             user_transactions.append(tx)
 
     user_transactions = user_transactions[:5]
@@ -174,30 +198,42 @@ def transfer():
     sender = session['user']
 
     if receiver not in users:
+
         flash('Пользователь не найден')
+
         return redirect(url_for('dashboard'))
 
     if receiver == sender:
+
         flash('Нельзя перевести самому себе')
+
         return redirect(url_for('dashboard'))
 
     try:
         amount = float(amount)
 
     except:
+
         flash('Неверная сумма')
+
         return redirect(url_for('dashboard'))
 
     if amount <= 0:
+
         flash('Сумма должна быть больше 0')
+
         return redirect(url_for('dashboard'))
 
     if amount > 5000:
+
         flash('Превышен дневной лимит перевода ($5000)')
+
         return redirect(url_for('dashboard'))
 
     if users[sender]['balance'] < amount:
+
         flash('Недостаточно средств')
+
         return redirect(url_for('dashboard'))
 
     users[sender]['balance'] -= amount
@@ -238,15 +274,21 @@ def deposit():
         amount = float(amount)
 
     except:
+
         flash('Неверная сумма')
+
         return redirect(url_for('dashboard'))
 
     if amount <= 0:
+
         flash('Сумма должна быть больше 0')
+
         return redirect(url_for('dashboard'))
 
     if amount > 10000:
+
         flash('Максимальное пополнение: $10000')
+
         return redirect(url_for('dashboard'))
 
     users[current_user]['balance'] += amount
@@ -292,6 +334,7 @@ def transactions_page():
         username=session['user']
     )
 
+
 # =========================
 # PAYMENTS PAGE
 # =========================
@@ -299,12 +342,14 @@ def transactions_page():
 @app.route("/payments/mobile")
 @login_required
 def mobile_payment_page():
+
     return render_template("mobile_payment.html")
 
 
 @app.route("/payments/internet")
 @login_required
 def internet_payment_page():
+
     return render_template("internet_payment.html")
 
 
@@ -314,9 +359,6 @@ def payments_page():
 
     return render_template('payments.html')
 
-# =========================
-# LOGOUT
-# =========================
 
 # =========================
 # PAYMENTS
@@ -340,22 +382,30 @@ def payment(service):
     }
 
     if service not in services:
+
         flash('Сервис не найден')
+
         return redirect(url_for('dashboard'))
 
     try:
         amount = float(amount)
 
     except:
+
         flash('Неверная сумма')
+
         return redirect(url_for('dashboard'))
 
     if amount <= 0:
+
         flash('Сумма должна быть больше 0')
+
         return redirect(url_for('dashboard'))
 
     if users[current_user]['balance'] < amount:
+
         flash('Недостаточно средств')
+
         return redirect(url_for('dashboard'))
 
     users[current_user]['balance'] -= amount
@@ -376,6 +426,11 @@ def payment(service):
 
     return redirect(url_for('dashboard'))
 
+
+# =========================
+# LOGOUT
+# =========================
+
 @app.route('/logout')
 def logout():
 
@@ -389,4 +444,5 @@ def logout():
 # =========================
 
 if __name__ == '__main__':
+
     app.run(debug=True, port=5000)
