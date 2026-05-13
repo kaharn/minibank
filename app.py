@@ -269,7 +269,7 @@ def deposit():
 
 
 # =========================
-# ALL TRANSACTIONS
+# TRANSACTIONS
 # =========================
 
 @app.route('/transactions')
@@ -283,7 +283,6 @@ def transactions_page():
     for tx in reversed(transactions):
 
         if tx['sender'] == session['user'] or tx['receiver'] == session['user']:
-
             user_transactions.append(tx)
 
     return render_template(
@@ -292,9 +291,16 @@ def transactions_page():
         username=session['user']
     )
 
+
 # =========================
-# PAYMENTS PAGE
+# PAYMENTS PAGES
 # =========================
+
+@app.route("/payments")
+@login_required
+def payments_page():
+    return render_template("payments.html")
+
 
 @app.route("/payments/mobile")
 @login_required
@@ -308,15 +314,11 @@ def internet_payment_page():
     return render_template("internet_payment.html")
 
 
-@app.route('/payments')
+@app.route("/payments/olimpbet")
 @login_required
-def payments_page():
+def olimpbet_page():
+    return render_template("olimpbet_payment.html")
 
-    return render_template('payments.html')
-
-# =========================
-# LOGOUT
-# =========================
 
 # =========================
 # PAYMENTS
@@ -376,6 +378,61 @@ def payment(service):
 
     return redirect(url_for('dashboard'))
 
+
+# =========================
+# OLIMPBET
+# =========================
+
+@app.route("/payment/olimpbet", methods=["POST"])
+@login_required
+def payment_olimpbet():
+
+    account = request.form.get("account")
+    amount = request.form.get("amount")
+
+    users = load_users()
+
+    username = session["user"]
+
+    try:
+        amount = float(amount)
+
+    except:
+        flash("Неверная сумма")
+        return redirect("/payments/olimpbet")
+
+    if amount <= 0:
+        flash("Сумма должна быть больше 0")
+        return redirect("/payments/olimpbet")
+
+    if users[username]["balance"] < amount:
+        flash("Недостаточно средств")
+        return redirect("/payments/olimpbet")
+
+    users[username]["balance"] -= amount
+
+    save_users(users)
+
+    transactions = load_transactions()
+
+    transactions.append({
+        "type": "Olimpbet",
+        "sender": username,
+        "receiver": account,
+        "amount": amount
+    })
+
+    save_transactions(transactions)
+
+    flash("Счет Olimpbet успешно пополнен")
+
+    return redirect("/payments")
+
+
+# =========================
+# LOGOUT
+# =========================
+
 @app.route('/logout')
 def logout():
 
@@ -389,4 +446,4 @@ def logout():
 # =========================
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)

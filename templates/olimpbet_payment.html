@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card" style="
+    max-width: 700px;
+    width: 95%;
+">
+
+    <h1 style="
+        margin-bottom: 30px;
+        color: var(--text);
+    ">
+        🎲 Olimpbet
+    </h1>
+
+
+    <form action="/payment/olimpbet" method="POST">
+
+        <input type="text"
+               name="account"
+               placeholder="ID аккаунта"
+               required>
+
+
+        <input type="number"
+               step="0.01"
+               name="amount"
+               placeholder="Сумма пополнения"
+               required>
+
+
+        <button type="submit"
+                class="btn"
+                style="
+                    background: linear-gradient(135deg,#ff2d55,#ff5e7e);
+                    color:white;
+                ">
+
+            Пополнить Olimpbet
+
+        </button>
+
+    </form>
+
+
+    <a href="/payments"
+       style="
+            display:block;
+            margin-top:20px;
+            color:#1a73e8;
+            text-decoration:none;
+       ">
+
+        ← Назад к платежам
+
+    </a>
+
+</div>
+
+{% endblock %}
