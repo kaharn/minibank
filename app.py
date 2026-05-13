@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import json
 import os
+import random
 from werkzeug.security import generate_password_hash, check_password_hash
 from decorators import login_required
 
@@ -25,6 +26,9 @@ def load_users():
         except:
             return {}
 
+def generate_card_number():
+
+    return f"{random.randint(4000,4999)} {random.randint(1000,9999)} {random.randint(1000,9999)} {random.randint(1000,9999)}"
 
 def save_users(users):
     if not os.path.exists('data'):
@@ -62,6 +66,15 @@ def save_transactions(transactions):
 def home():
     return render_template('home.html')
 
+def generate_card_number():
+
+    return f"""
+        {random.randint(4000,4999)}
+        {random.randint(1000,9999)}
+        {random.randint(1000,9999)}
+        {random.randint(1000,9999)}
+    """.replace("\n", "").strip()
+
 
 # =========================
 # REGISTER
@@ -87,7 +100,8 @@ def register():
         users[username] = {
             "password": hashed_password,
             "full_name": full_name,
-            "balance": 1000
+            "balance": 1000,
+            "card_number": generate_card_number()
         }
 
         save_users(users)
@@ -154,7 +168,8 @@ def dashboard():
         'dashboard.html',
         username=session['user'],
         balance=current_user.get('balance', 0),
-        transactions=user_transactions
+        transactions=user_transactions,
+        card_number=current_user.get("card_number", "0000 0000 0000 0000")
     )
 
 

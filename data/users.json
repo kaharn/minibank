@@ -1,25 +1,14 @@
 {
-    "kaharn": {
-        "password": "Sulpak2008",
-        "full_name": "Kakhar"
+    "admin1": {
+        "password": "scrypt:32768:8:1$2QQ9daHIBbY7FowY$efa289c93c3a941cd4f44879240393bb95afd770c91e04fc5299500112ebf9fc3cfbf6235f9acdc92862e4d11e6e2f85b5c5c3d791f9ce80a6ebc39370eb3f3d",
+        "full_name": "админ",
+        "balance": 1000,
+        "card_number": "4551 5458 8145 9296"
     },
-    "Azaza": {
-        "password": "Aza2008",
-        "full_name": "Азамат Танат"
-    },
-    "Azzeke17": {
-        "password": "scrypt:32768:8:1$fV9BewhMm94YIDRI$096d01abe4fe4543753c266f283c18e91ccec1c26069f8e2054270af5a73cef7ef4103a1bfa253ee94fd62202c98721d3fc9222adbd68ff71f488c2765fd63f5",
-        "full_name": "Аза",
-        "balance": 391.0
-    },
-    "Kaharn": {
-        "password": "scrypt:32768:8:1$7gW8vjRhoZFmfynv$a27bdacd511d0c41e423b0de2e3c94633dc24a07733328a9e2ca70d92a4ef3aaf1369f7772b34073ccd6a98f917bc54ebe9caf218ed2bd48cde507f67b297cbe",
-        "full_name": "Кахар",
-        "balance": 98605.0
-    },
-    "cr7": {
-        "password": "scrypt:32768:8:1$gkH0wyOPy7xOr1JN$27e0093a7bbce56650e6b7ff948baec2e8292b1a25b50e28e89339c49cddc458d2d4a4060fec516e54c93f5b90b04413fa39764461a66c46c5a48655d7dbd4d1",
-        "full_name": "Cristiano ",
-        "balance": 67676.7
+    "admin2": {
+        "password": "scrypt:32768:8:1$seqfNQr2D1w7LRr0$0bc320a4ca27ac4f8c8e9f2f2b9c907d9f4c78b32c444c45b9501bb0279dfb8f86f2e62a104f97b0435c2ca291666d205700ac510692badb0531d7bffb69d7bf",
+        "full_name": "админ2",
+        "balance": 1000,
+        "card_number": "4850        5290        9602        6005"
     }
 }
