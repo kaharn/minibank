@@ -4,7 +4,7 @@ Hi!
 This is our group project created by me and my friend @Azzeke.  
 We developed a simple web-based banking system called **MiniBank** using **Python** and **Flask**.
 
-
+![Tech Stack](https://www.google.com/imgres?q=flask%20python&imgurl=https%3A%2F%2Fmiro.medium.com%2F0*FBXoiXHbZe5ssPho.png&imgrefurl=https%3A%2F%2Fpython.plainenglish.io%2Fflask-a-micro-web-development-framework-550fc921cdbe&docid=kC5K8flBGUM73M&tbnid=XJ-nWIY8xTi5wM&vet=12ahUKEwiqsa_TmMmUAxU-8LsIHbvGFRYQnPAOegQIIBAB..i&w=618&h=200&hcb=2&ved=2ahUKEwiqsa_TmMmUAxU-8LsIHbvGFRYQnPAOegQIIBAB)
 
 # 📌 Project Description
 
